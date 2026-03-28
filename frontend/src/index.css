@@ -1,0 +1,440 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
+}
+
+/* Warm tone academic style Light Mode - cream paper texture */
+@layer base {
+  :root {
+    --background: 35 35% 85%;
+    --foreground: 25 40% 12%;
+    --card: 36 38% 88%;
+    --card-foreground: 25 40% 12%;
+    --primary: 25 90% 45%;
+    --primary-foreground: 35 50% 95%;
+    --secondary: 30 30% 75%;
+    --secondary-foreground: 25 35% 18%;
+    --muted: 32 25% 78%;
+    --muted-foreground: 25 20% 35%;
+    --accent: 35 45% 75%;
+    --accent-foreground: 25 40% 15%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 35 50% 95%;
+    --border: 28 20% 72%;
+    --input: 28 20% 72%;
+    --ring: 25 90% 45%;
+  }
+
+  /* Warm colors Dark Mode */
+  .dark {
+    --background: 25 20% 10%;
+    --foreground: 35 30% 90%;
+    --card: 25 18% 13%;
+    --card-foreground: 35 30% 90%;
+    --primary: 28 85% 52%;
+    --primary-foreground: 25 20% 10%;
+    --secondary: 25 15% 20%;
+    --secondary-foreground: 35 30% 85%;
+    --muted: 25 12% 18%;
+    --muted-foreground: 30 10% 58%;
+    --accent: 25 15% 23%;
+    --accent-foreground: 35 30% 85%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 35 30% 90%;
+    --border: 25 12% 22%;
+    --input: 25 12% 22%;
+    --ring: 28 85% 52%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    background-image: 
+      radial-gradient(ellipse at 0% 0%, hsla(32, 35%, 80%, 0.7) 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 100%, hsla(28, 40%, 78%, 0.6) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  .dark body {
+    background-image: 
+      radial-gradient(ellipse at 0% 0%, hsla(25, 20%, 16%, 0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 100%, hsla(28, 18%, 14%, 0.4) 0%, transparent 50%);
+  }
+}
+
+/* Global scroll bar style */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  
+  .scrollbar-thumb-muted {
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+  
+  .scrollbar-track-transparent {
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-from-bottom {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-top {
+  from { 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Animation tools */
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+  
+  .animate-slide-in-bottom {
+    animation: slide-in-from-bottom 0.4s ease-out;
+  }
+  
+  .animate-slide-in-top {
+    animation: slide-in-from-top 0.4s ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+}
+
+/* card floating effect */
+@layer utilities {
+  .card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px hsla(30, 30%, 50%, 0.12);
+  }
+
+  .dark .card-hover:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* frosted glass effect */
+@layer utilities {
+  .glass {
+    background: hsla(var(--background), 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-card {
+    background: hsla(var(--card), 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* gradient background */
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(25, 90%, 45%) 0%, hsl(28, 85%, 40%) 100%);
+  }
+
+  .gradient-soft {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+  }
+}
+
+/* Amber glow effect */
+@layer utilities {
+  .glow-primary {
+    box-shadow: 0 0 20px hsla(25, 90%, 45%, 0.3), 0 0 40px hsla(25, 90%, 45%, 0.1);
+  }
+
+  .glow-soft {
+    box-shadow: 0 4px 20px hsla(30, 50%, 60%, 0.15);
+  }
+}
+
+/* Prose Style Coverage - Academic Style */
+.prose {
+  --tw-prose-body: hsl(var(--foreground));
+  --tw-prose-headings: hsl(30, 35%, 18%);
+  --tw-prose-links: hsl(var(--primary));
+  --tw-prose-bold: hsl(30, 35%, 18%);
+  --tw-prose-counters: hsl(var(--muted-foreground));
+  --tw-prose-bullets: hsl(var(--muted-foreground));
+  --tw-prose-hr: hsl(var(--border));
+  --tw-prose-quotes: hsl(30, 25%, 28%);
+  --tw-prose-quote-borders: hsla(var(--primary), 0.3);
+  --tw-prose-captions: hsl(var(--muted-foreground));
+  --tw-prose-code: hsl(30, 35%, 18%);
+  --tw-prose-pre-code: hsl(var(--foreground));
+  --tw-prose-pre-bg: hsl(30, 15%, 18%);
+  --tw-prose-th-borders: hsl(var(--border));
+  --tw-prose-td-borders: hsl(var(--border));
+}
+
+.dark .prose {
+  --tw-prose-body: hsl(var(--foreground));
+  --tw-prose-headings: hsl(35, 30%, 88%);
+  --tw-prose-links: hsl(var(--primary));
+  --tw-prose-bold: hsl(35, 30%, 88%);
+  --tw-prose-quotes: hsl(35, 25%, 75%);
+  --tw-prose-quote-borders: hsla(var(--primary), 0.4);
+  --tw-prose-code: hsl(35, 30%, 88%);
+  --tw-prose-pre-code: hsl(var(--foreground));
+  --tw-prose-pre-bg: hsl(25, 15%, 18%);
+}
+
+/* ========================================
+   PDF Viewer Theme Override
+   Override using CSS variables @react-pdf-viewer default theme
+   ======================================== */
+
+/* Light mode PDF viewer variable override */
+:root {
+  /* Buttons and toolbars */
+  --rpv-core__button-background-color: hsla(var(--primary), 0.9);
+  --rpv-core__button-color: hsl(var(--primary-foreground));
+  --rpv-core__minimal-button-color: hsl(var(--foreground));
+  --rpv-core__minimal-button--hover-background-color: hsla(var(--primary), 0.1);
+  --rpv-core__minimal-button--selected-background-color: hsla(var(--primary), 0.15);
+  --rpv-core__minimal-button--disabled-color: hsla(var(--foreground), 0.3);
+  
+  /* main button */
+  --rpv-core__primary-button-background-color: hsl(var(--primary));
+  --rpv-core__primary-button-color: hsl(var(--primary-foreground));
+  
+  /* background color */
+  --rpv-core__doc-loading-background-color: hsl(var(--background));
+  --rpv-core__doc-error-background-color: hsl(var(--background));
+  --rpv-core__inner-page-background-color: hsl(var(--background));
+  
+  /* Pop-ups and menus */
+  --rpv-core__popover-body-background-color: hsl(var(--card));
+  --rpv-core__popover-body-border-color: hsl(var(--border));
+  --rpv-core__popover-body-color: hsl(var(--foreground));
+  --rpv-core__modal-body-background-color: hsl(var(--card));
+  --rpv-core__modal-body-border-color: hsl(var(--border));
+  --rpv-core__tooltip-body-background-color: hsl(var(--foreground));
+  --rpv-core__tooltip-body-color: hsl(var(--background));
+  
+  /* menu item */
+  --rpv-core__menu-item-color: hsl(var(--foreground));
+  --rpv-core__menu-item--hover-background-color: hsla(var(--primary), 0.1);
+  --rpv-core__menu-item--disabled-color: hsla(var(--foreground), 0.3);
+  --rpv-core__menu-divider-border-bottom-color: hsl(var(--border));
+  
+  /* text box */
+  --rpv-core__textbox-background-color: hsl(var(--background));
+  --rpv-core__textbox-border-color: hsl(var(--border));
+  --rpv-core__textbox-color: hsl(var(--foreground));
+  
+  /* divider */
+  --rpv-core__separator-border-bottom-color: hsl(var(--border));
+  
+  /* progress bar */
+  --rpv-core__progress-bar-background-color: hsla(var(--foreground), 0.1);
+  --rpv-core__progress-bar-progress-background-color: hsl(var(--primary));
+  --rpv-core__progress-bar-progress-color: hsl(var(--primary-foreground));
+  
+  /* loading animation */
+  --rpv-core__spinner-border-color: hsl(var(--primary));
+  --rpv-core__spinner-border-transparent-color: transparent;
+  
+  /* page shadow */
+  --rpv-core__page-layer-box-shadow: 0 2px 10px hsla(0, 0%, 0%, 0.08);
+  
+  /* text selection */
+  --rpv-core__text-layer-text--selection-background-color: hsla(var(--primary), 0.3);
+  
+  /* divider */
+  --rpv-core__splitter-background-color: hsl(var(--border));
+  --rpv-core__splitter--hover-background-color: hsl(var(--primary));
+  
+  /* Password dialog */
+  --rpv-core__asking-password-wrapper-background-color: hsl(var(--card));
+  --rpv-core__asking-password-wrapper-border-color: hsl(var(--border));
+  --rpv-core__asking-password-color: hsl(var(--foreground));
+  --rpv-core__asking-password-background-color: hsl(var(--background));
+}
+
+/* Dark mode PDF viewer variable override */
+.dark {
+  --rpv-core__button-background-color: hsla(var(--primary), 0.8);
+  --rpv-core__button-color: hsl(var(--primary-foreground));
+  --rpv-core__minimal-button-color: hsl(var(--foreground));
+  --rpv-core__minimal-button--hover-background-color: hsla(var(--primary), 0.15);
+  --rpv-core__minimal-button--selected-background-color: hsla(var(--primary), 0.25);
+  --rpv-core__minimal-button--disabled-color: hsla(var(--foreground), 0.3);
+  
+  --rpv-core__primary-button-background-color: hsl(var(--primary));
+  --rpv-core__primary-button-color: hsl(var(--primary-foreground));
+  
+  --rpv-core__doc-loading-background-color: hsl(var(--background));
+  --rpv-core__doc-error-background-color: hsl(var(--background));
+  --rpv-core__inner-page-background-color: hsl(var(--background));
+  
+  --rpv-core__popover-body-background-color: hsl(var(--card));
+  --rpv-core__popover-body-border-color: hsl(var(--border));
+  --rpv-core__popover-body-color: hsl(var(--foreground));
+  --rpv-core__modal-body-background-color: hsl(var(--card));
+  --rpv-core__modal-body-border-color: hsl(var(--border));
+  --rpv-core__tooltip-body-background-color: hsl(var(--foreground));
+  --rpv-core__tooltip-body-color: hsl(var(--background));
+  
+  --rpv-core__menu-item-color: hsl(var(--foreground));
+  --rpv-core__menu-item--hover-background-color: hsla(var(--primary), 0.15);
+  
+  --rpv-core__textbox-background-color: hsl(var(--background));
+  --rpv-core__textbox-border-color: hsl(var(--border));
+  --rpv-core__textbox-color: hsl(var(--foreground));
+  
+  --rpv-core__separator-border-bottom-color: hsl(var(--border));
+  --rpv-core__progress-bar-background-color: hsla(var(--foreground), 0.1);
+  --rpv-core__progress-bar-progress-background-color: hsl(var(--primary));
+  
+  --rpv-core__spinner-border-color: hsl(var(--primary));
+  
+  --rpv-core__page-layer-box-shadow: 0 2px 10px hsla(0, 0%, 0%, 0.2);
+  
+  --rpv-core__splitter-background-color: hsl(var(--border));
+  --rpv-core__splitter--hover-background-color: hsl(var(--primary));
+}
+
+/* PDF Viewer container background */
+.rpv-core__viewer {
+  background-color: hsl(var(--background)) !important;
+}
+
+.rpv-core__inner-pages {
+  background-color: hsl(var(--background)) !important;
+}
+
+/* Make sure there is enough padding in the content area of ​​the page */
+.rpv-core__inner-page {
+  margin: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Invert PDF pages in dark mode */
+.dark .rpv-core__canvas-layer canvas {
+  filter: invert(0.9) hue-rotate(180deg);
+}
+
+.dark .rpv-core__text-layer {
+  filter: invert(0.9) hue-rotate(180deg);
+}
+
+/* Toolbar enhanced style */
+.rpv-core__minimal-button {
+  border-radius: 0.5rem !important;
+  transition: background-color 0.2s ease;
+}
+
+.rpv-core__button {
+  border-radius: 0.5rem !important;
+  font-weight: 500;
+}
+
+.rpv-core__primary-button {
+  border-radius: 0.5rem !important;
+}
+
+/* Pop-up window rounded corners */
+.rpv-core__popover-body {
+  border-radius: 0.75rem !important;
+  box-shadow: 0 4px 20px hsla(0, 0%, 0%, 0.15) !important;
+}
+
+.rpv-core__modal-body {
+  border-radius: 0.75rem !important;
+}
+
+/* Input box rounded corners */
+.rpv-core__textbox {
+  border-radius: 0.5rem !important;
+}
+
+/* scroll bar */
+.rpv-core__inner-pages::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.rpv-core__inner-pages::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+.rpv-core__inner-pages::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+.rpv-core__inner-pages::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground));
+}
