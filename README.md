@@ -1,9 +1,12 @@
-# ScholarRAG
+# RAGPaper
 
 > Multimodal Retrieval-Augmented Generation (RAG) System for Academic Literature
 
-ScholarRAG is a **multimodal RAG system** designed specifically for academic researchers. It not only understands and retrieves text from papers, but also parses **complex tables, charts, and mathematical formulas**, providing researchers with a deep, intelligent literature interaction experience.
+RAGPaper is a **multimodal RAG system** designed specifically for academic researchers. It not only understands and retrieves text from papers, but also parses **complex tables, charts, and mathematical formulas**, providing researchers with a deep, intelligent literature interaction experience.
 
+![RAGPaper](./frontend/src/assets/pic.png)
+
+![RAGPaper](./frontend/src/assets/pic2.png)
 ---
 
 ## 🌟 Core Features
@@ -60,7 +63,7 @@ ScholarRAG is a **multimodal RAG system** designed specifically for academic res
 ## 🏗️ System Architecture
 
 ```
-ScholarRAG/
+RAGPaper/
 ├── main.py                    # CLI Entry (add/query/delete subcommands)
 ├── api/                       # FastAPI Backend
 │   ├── main.py               # Application factory, CORS, routing
@@ -114,7 +117,7 @@ ScholarRAG/
 ├── data/                      # Data output (gitignored)
 │   ├── parsed/               # MinerU outputs
 │   ├── uploads/              # Temporary file uploads
-│   └── scholarrag.db         # SQLite persistent state
+│   └── RAGPaper.db         # SQLite persistent state
 └── .github/workflows/        # GitHub Actions CI/CD
 ```
 
@@ -134,11 +137,11 @@ ScholarRAG/
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd ScholarRAG
+cd RAGPaper
 
 # Create Python environment
-conda create -n scholarrag python=3.12
-conda activate scholarrag
+conda create -n RAGPaper python=3.12
+conda activate RAGPaper
 
 # Install dependencies
 pip install -r requirements.txt
@@ -158,7 +161,7 @@ cp .env.example .env
 # - OPENAI_API_BASE: API base URL (Default: http://localhost:8000/v1)
 # - EMBEDDING_MODEL: Qwen3-VL embedded model path
 # - QDRANT_HOST, QDRANT_PORT: Qdrant service addresses
-# - QDRANT_COLLECTION_NAME: Qdrant collection name (Default: scholarrag)
+# - QDRANT_COLLECTION_NAME: Qdrant collection name (Default: RAGPaper)
 # - LLM_MODEL: Large Language Model name (Default: Pro/moonshotai/Kimi-K2.5)
 ```
 
@@ -194,7 +197,7 @@ npm run dev
 ### 4. Docker Deployment
 
 ```bash
-docker build -t scholarrag .
+docker build -t RAGPaper .
 docker compose up -d
 
 # Health Check
@@ -250,7 +253,7 @@ The `.dockerignore` safely excludes `data/`, `models/`, and `qdrant_storage/` si
 | `EMBEDDING_MODEL` | Embedding Model Path | `models/Qwen3-VL-Embedding-2B` |
 | `QDRANT_HOST` | Qdrant Gateway IP | `localhost` |
 | `QDRANT_PORT` | Qdrant Port | `6333` |
-| `QDRANT_COLLECTION_NAME` | Main collection | `scholarrag` |
+| `QDRANT_COLLECTION_NAME` | Main collection | `RAGPaper` |
 | `RAG_TOP_K` | Vector retrieval top-K count | `5` |
 | `SCORE_THRESHOLD` | Minimum match similarity threshold | `0.3` |
 | `AGENT_MAX_ITERATIONS` | Max loops for Agentic RAG | `10` |
@@ -301,7 +304,7 @@ The `.dockerignore` safely excludes `data/`, `models/`, and `qdrant_storage/` si
 
 ## 🔄 CI/CD
 
-ScholarRAG continuously verifies reliability using GitHub Actions:
+RAGPaper continuously verifies reliability using GitHub Actions:
 
 ```yaml
 # .github/workflows/ci.yml
@@ -396,14 +399,8 @@ npm run lint
 
 ## 📄 License
 
-MIT License © ScholarRAG Team
+MIT License © RAGPaper Team
 
 ---
 
-<div align="center">
 
-**[⬆ Back to Top](#scholarrag)**
-
-Built with ❤️ for Academic Research
-
-</div>
