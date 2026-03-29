@@ -61,6 +61,8 @@ def test_add_multimodal_uses_config_embedding_batch_size(monkeypatch) -> None:
 
     store = _build_store_for_add_multimodal()
     monkeypatch.setattr(vector_store_module.config, "EMBEDDING_BATCH_SIZE", 32)
+    if getattr(vector_store_module, "torch", None) is not None:
+        monkeypatch.setattr(vector_store_module.torch.cuda, "is_available", lambda: False)
 
     inputs = [{"text": f"chunk-{i}"} for i in range(33)]
     metadatas = [{"pdf_name": "paper", "page_idx": i} for i in range(33)]
@@ -79,6 +81,8 @@ def test_add_multimodal_explicit_batch_size_overrides_config(monkeypatch) -> Non
 
     store = _build_store_for_add_multimodal()
     monkeypatch.setattr(vector_store_module.config, "EMBEDDING_BATCH_SIZE", 32)
+    if getattr(vector_store_module, "torch", None) is not None:
+        monkeypatch.setattr(vector_store_module.torch.cuda, "is_available", lambda: False)
 
     inputs = [{"text": f"chunk-{i}"} for i in range(17)]
     metadatas = [{"pdf_name": "paper", "page_idx": i} for i in range(17)]

@@ -11,7 +11,10 @@ import threading
 import uuid
 from typing import Any
 
-import torch  # pyright: ignore[reportMissingImports]
+try:
+    import torch  # pyright: ignore[reportMissingImports]
+except ImportError:
+    torch = None
 from langchain_qdrant import QdrantVectorStore, RetrievalMode  # pyright: ignore[reportMissingImports]
 from qdrant_client import QdrantClient  # pyright: ignore[reportMissingImports]
 from qdrant_client.http import models  # pyright: ignore[reportMissingImports]
@@ -228,7 +231,8 @@ class MultimodalQdrantStore(QdrantVectorStore):
                 total_batches,
                 len(batch_inputs),
             )
-            torch.cuda.empty_cache()
+            if torch is not None and torch.cuda.is_available():
+                torch.cuda.empty_cache()
 
         logger.info(
             "Stored %d multimodal items in collection %s",
@@ -240,7 +244,7 @@ class MultimodalQdrantStore(QdrantVectorStore):
     def _resolve_embedding_batch_size(self, batch_size: int | None) -> int:
         requested = batch_size if batch_size is not None else config.EMBEDDING_BATCH_SIZE
         requested = max(1, int(requested))
-        if not torch.cuda.is_available():
+        if torch is None or not torch.cuda.is_available():
             return requested
 
         try:
