@@ -1,4 +1,4 @@
- 11111111111111111111111111111111111# pyright: reportMissingImports=false
+# pyright: reportMissingImports=false
 
 import argparse
 import os
